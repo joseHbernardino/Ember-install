@@ -1,0 +1,36 @@
+# Guia de Instalação do Ember
+
+## Instalação do Ember - sistema de doações, bans, tela de carregamento e página inicial via AAPANEL
+
+### Guia Passo a Passo
+
+1. **Instale o AAPanel**
+
+2. **Configuração Inicial**
+   - Quando você iniciar e acessar o AAPanel, ele perguntará se você deseja instalar as dependências do site.
+   - Instale NGINX, MySQL, PHP 8.1, phpMyAdmin e outras dependências conforme necessário.
+
+3. **Adicionar Website**
+   - Vá para a seção "Website" e clique em "Add Site".
+   - Insira o nome do seu domínio no campo "Domain name".
+   - Na seção "Database", selecione MySQL.
+   - Defina a versão do PHP para 8.1.
+   - Confirme para gerar as configurações.
+
+4. **Configuração do Website**
+   - Na seção "Website", clique no caminho raiz exibido `/www/wwwroot/{DOMAIN}`
+     - Delete todos os arquivos dentro desta pasta. (Alguns arquivos podem não ser deletados em massa, então apague-os um por um, se necessário)
+   - Faça o upload da pasta Web baixada do site da Ember.
+   - Configure o arquivo `config.php`.
+     - As credenciais do MySQL podem ser encontradas na categoria "Databases". Recupere e salve-as para colocar neste arquivo.
+   - Após o upload, volte à seção "Website", clique no domínio e um pop-up de configuração será aberto.
+     - Vá até a categoria "Site directory" e defina o diretório principal até a pasta web que você enviou. Salve.
+     - Defina o "Running directory" para a pasta Public. Salve.
+
+5. **Configuração de Reescrita de URL**
+   - Vá para "URL rewrite" e insira o seguinte conteúdo:
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}

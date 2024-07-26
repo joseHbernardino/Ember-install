@@ -1,0 +1,36 @@
+# Ember Installation Guide
+
+## Installation of Ember - donation system, bans, loading screen & landing/index page via AAPANEL
+
+### Step-by-Step Guide
+
+1. **Install AAPanel**
+
+2. **Initial Setup**
+   - When you start and access AAPanel, it will ask if you want to install website dependencies.
+   - Install NGINX, MySQL, PHP 8.1, phpMyAdmin, and other dependencies as needed.
+
+3. **Add Website**
+   - Go to the "Website" section and click on "Add Site."
+   - Enter your domain name in the "Domain name" field.
+   - In the "Database" section, select MySQL.
+   - Set the PHP version to 8.1.
+   - Confirm to generate the configurations.
+
+4. **Website Configuration**
+   - In the "Website" section, click on the root path displayed `/www/wwwroot/{DOMAIN}`
+     - Delete all files within this folder. (Some files might not delete in bulk, so delete them one by one if necessary)
+   - Upload the Web folder downloaded from the Ember site.
+   - Configure the `config.php` file.
+     - MySQL credentials can be found under the "Databases" category. Retrieve and save them to put into this file.
+   - After uploading, go back to the "Website" section, click on the domain, and a configuration pop-up will open.
+     - Go to the "Site directory" category and set the main directory to the web folder you uploaded. Save it.
+     - Set the "Running directory" to the Public folder. Save it.
+
+5. **URL Rewrite Configuration**
+   - Go to "URL rewrite" and insert the following content:
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
